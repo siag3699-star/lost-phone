@@ -9,12 +9,15 @@
 body{margin:0;background:#17191d;font-family:Arial,sans-serif;color:#222}
 .phone{max-width:390px;min-height:100vh;margin:auto;background:#f4f5f7}
 .status{height:30px;padding:8px 18px;background:white;font-size:12px;display:flex;justify-content:space-between}
-/* 잠금화면과 홈화면 배경을 마인크래프트 캐릭터 이미지로 일괄 적용 */
+
+/* 마인크래프트 배경화면 적용 */
 #lock{min-height:calc(100vh - 30px);padding:25px;color:white;text-align:center;background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://squarespace-cdn.com') no-repeat center center;background-size:cover}
 .clock{font-size:68px;font-weight:200;margin-top:75px}
 .date{font-size:14px;margin-top:5px}
 .notification{margin-top:65px;background:#ffffff30;border-radius:16px;padding:17px;text-align:left;line-height:1.7}
-.unlock{margin-top:45px;padding:14px 25px;border-radius:30px;border:1px solid #ffffff80;background:#ffffff20;color:white}
+.unlock{margin-top:45px;padding:14px 25px;border-radius:30px;border:1px solid #ffffff80;background:#ffffff20;color:white;cursor:pointer}
+
+/* 홈 화면 배경화면 동일 적용 */
 #home{display:none;min-height:calc(100vh - 30px);background:linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://squarespace-cdn.com') no-repeat center center;background-size:cover}
 .header{padding:24px 20px;background:rgba(255,255,255,0.85)}
 .header h2{margin:10px 0}
@@ -23,10 +26,11 @@ body{margin:0;background:#17191d;font-family:Arial,sans-serif;color:#222}
 .app{text-align:center;font-size:13px;cursor:pointer;color:white;text-shadow:1px 1px 3px rgba(0,0,0,0.8)}
 .ico{width:55px;height:55px;border-radius:16px;display:grid;place-items:center;margin:0 auto 8px;font-size:25px;color:white;text-shadow:none}
 .green{background:#4db779}.blue{background:#4b8ce0}.orange{background:#e5a052}.purple{background:#8b78d8}.gray{background:#737d88}.red{background:#dc7278}
+
 #page{display:none;padding:18px;min-height:65vh;background:#f4f5f7;color:#222}
 .back{background:#e7e9ed;padding:10px 15px;border:none;cursor:pointer}
 .item{padding:15px 3px;border-bottom:1px solid #e2e3e6;cursor:pointer}
-.item small {display:block;color:#858990;margin-top:5px}
+.item small{display:block;color:#858990;margin-top:5px}
 #detail{line-height:1.8;white-space:pre-line;margin-top:18px}
 .bubble{background:#d9eaff;padding:11px 14px;border-radius:15px;margin:10px 0 10px auto;width:fit-content;max-width:90%}
 .reply{background:white;padding:11px 14px;border-radius:15px;margin:10px auto 10px 0;width:fit-content;max-width:90%}
@@ -74,6 +78,7 @@ input{padding:12px;border:1px solid #ddd;border-radius:10px;width:100%;margin-to
 </div>
 
 <script>
+// 원본 데이터 구조 100% 복구
 const data={
 messages:{
 title:"메시지",
@@ -130,7 +135,7 @@ settings:{
 title:"설정",
 items:[
 ["휴대폰 정보","기기 이름","이청현의 휴대폰"],
-["배터리", "82%", "정상"],
+["배터리","82%","정상"],
 ["화면 설정","기본 테마","밝은 화면"]
 ]}
 };
