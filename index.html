@@ -2,121 +2,78 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>이청현의 휴대폰</title>
 <style>
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-body { margin: 0; background: #17191d; font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; color: #222; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
-
-/* 스마트폰 1:1 비율 외부 해상도 고정 프레임 */
-.phone { width: 360px; height: 740px; border-radius: 36px; box-shadow: 0 25px 50px rgba(0,0,0,0.6); position: relative; overflow: hidden; display: flex; flex-direction: column; background: #000; }
-
-/* 투명 스마트폰 상단바 인터페이스 */
-.status { height: 32px; padding: 6px 18px; background: rgba(0, 0, 0, 0.2); font-size: 12px; display: flex; justify-content: space-between; align-items: center; color: white; z-index: 100; font-weight: bold; }
-
-/* 화면 전체 공통 뷰 규격 (화면 절대 겹치지 않게 구조 강제 정의) */
-.screen { position: absolute; top: 32px; left: 0; width: 100%; height: calc(100% - 32px); display: flex; flex-direction: column; background-size: cover; background-position: center; }
-
-/* 요청하신 마인크래프트 원본 배경화면 잠금 화면 지정 */
-#lock { z-index: 30; padding: 40px 24px; text-align: center; background-image: url('https://squarespace-cdn.com'); justify-content: space-between; }
-.clock { font-size: 64px; font-weight: 200; margin-top: 50px; color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
-.date { font-size: 14px; margin-top: 5px; color: white; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
-
-/* 알림창 팝업 블러 필터 적용 */
-.notification { margin-top: 65px; background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-radius: 16px; padding: 17px; text-align: left; line-height: 1.7; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
-.unlock { margin-top: 45px; padding: 14px 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.6); background: rgba(0, 0, 0, 0.4); color: white; font-size: 14px; font-weight: bold; cursor: pointer; width: fit-content; margin-left: auto; margin-right: auto; outline: none; }
-.unlock:active { background: rgba(0, 0, 0, 0.6); }
-
-/* 홈 화면 레이아웃 (마인크래프트 배경 동일 세팅) */
-#home { z-index: 10; display: none; background-image: url('https://squarespace-cdn.com'); }
-.header { padding: 35px 24px 10px; text-align: left; color: white; }
-.header h2 { margin: 6px 0; font-size: 26px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-.muted { font-size: 12px; opacity: 0.9; text-shadow: 0 1px 3px rgba(0,0,0,0.6); color: white; font-weight: bold; }
-
-/* 3열 홈 화면 아이콘 그리드 전면 최적화 배치 */
-.apps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 8px; padding: 25px 15px; }
-.app { text-align: center; font-size: 12px; color: white; font-weight: bold; cursor: pointer; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
-.ico { width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; margin: 0 auto 8px; font-size: 26px; color: white; box-shadow: 0 5px 10px rgba(0,0,0,0.3); }
-.app:active .ico { transform: scale(0.92); }
-
-.green { background: linear-gradient(135deg, #5ce19f, #229a57); }
-.blue { background: linear-gradient(135deg, #66a6ff, #2962ff); }
-.orange { background: linear-gradient(135deg, #ffb347, #ffcc00); }
-.purple { background: linear-gradient(135deg, #cc99ff, #7744ff); }
-.gray { background: linear-gradient(135deg, #a1a8b3, #4e5561); }
-
-/* 내부 서브 상세페이지 인디케이터 */
-#page { z-index: 20; display: none; background: #f4f5f7; overflow-y: auto; color: #222; }
-.back { background: #e7e9ed; padding: 12px 15px; border: none; width: 100%; text-align: left; font-size: 14px; font-weight: bold; cursor: pointer; border-bottom: 1px solid #dcdde1; }
-.page-title-bar { padding: 24px 20px 5px; }
-#heading { font-size: 22px; color: #111; font-weight: bold; }
-#list { padding: 0 15px 20px; }
-
-.item { padding: 16px 5px; border-bottom: 1px solid #e2e3e6; cursor: pointer; text-align: left; }
-.item b { font-size: 15px; color: #111; }
-.item small { display: block; color: #858990; margin-top: 5px; font-size: 12px; }
-#detail { line-height: 1.8; white-space: pre-line; margin-top: 18px; padding: 15px; }
-
-/* 카카오톡 노란색 디자인 메신저 인터페이스 복원 */
-.bubble { background: #ffec42; color: #000; padding: 11px 14px; border-radius: 15px; margin: 10px 0 10px auto; width: fit-content; max-width: 85%; font-size: 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.15); text-align: left; }
-.reply { background: white; color: #000; padding: 11px 14px; border-radius: 15px; margin: 10px auto 10px 0; width: fit-content; max-width: 85%; font-size: 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.15); text-align: left; }
-.photo { background: #e1e5e9; border-radius: 12px; padding: 24px 8px; text-align: center; margin: 8px 0; font-size: 14px; }
-input { padding: 12px; border: 1px solid #ddd; border-radius: 10px; width: 100%; margin-top: 10px; font-size: 14px; outline: none; background: white; color: #000; }
+*{box-sizing:border-box}
+body{margin:0;background:#17191d;font-family:Arial,sans-serif;color:#222}
+.phone{max-width:390px;min-height:100vh;margin:auto;background:#f4f5f7}
+.status{height:30px;padding:8px 18px;background:white;font-size:12px;display:flex;justify-content:space-between}
+/* 잠금화면과 홈화면 배경을 마인크래프트 캐릭터 이미지로 일괄 적용 */
+#lock{min-height:calc(100vh - 30px);padding:25px;color:white;text-align:center;background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://squarespace-cdn.com') no-repeat center center;background-size:cover}
+.clock{font-size:68px;font-weight:200;margin-top:75px}
+.date{font-size:14px;margin-top:5px}
+.notification{margin-top:65px;background:#ffffff30;border-radius:16px;padding:17px;text-align:left;line-height:1.7}
+.unlock{margin-top:45px;padding:14px 25px;border-radius:30px;border:1px solid #ffffff80;background:#ffffff20;color:white}
+#home{display:none;min-height:calc(100vh - 30px);background:linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://squarespace-cdn.com') no-repeat center center;background-size:cover}
+.header{padding:24px 20px;background:rgba(255,255,255,0.85)}
+.header h2{margin:10px 0}
+.muted{font-size:12px;color:#858990}
+.apps{display:grid;grid-template-columns:repeat(3,1fr);gap:27px 8px;padding:28px 15px}
+.app{text-align:center;font-size:13px;cursor:pointer;color:white;text-shadow:1px 1px 3px rgba(0,0,0,0.8)}
+.ico{width:55px;height:55px;border-radius:16px;display:grid;place-items:center;margin:0 auto 8px;font-size:25px;color:white;text-shadow:none}
+.green{background:#4db779}.blue{background:#4b8ce0}.orange{background:#e5a052}.purple{background:#8b78d8}.gray{background:#737d88}.red{background:#dc7278}
+#page{display:none;padding:18px;min-height:65vh;background:#f4f5f7;color:#222}
+.back{background:#e7e9ed;padding:10px 15px;border:none;cursor:pointer}
+.item{padding:15px 3px;border-bottom:1px solid #e2e3e6;cursor:pointer}
+.item small {display:block;color:#858990;margin-top:5px}
+#detail{line-height:1.8;white-space:pre-line;margin-top:18px}
+.bubble{background:#d9eaff;padding:11px 14px;border-radius:15px;margin:10px 0 10px auto;width:fit-content;max-width:90%}
+.reply{background:white;padding:11px 14px;border-radius:15px;margin:10px auto 10px 0;width:fit-content;max-width:90%}
+.photo{background:#e1e5e9;border-radius:12px;padding:24px 8px;text-align:center;margin:8px 0}
+input{padding:12px;border:1px solid #ddd;border-radius:10px;width:100%;margin-top:10px}
 </style>
 </head>
 <body>
 <div class="phone">
-    <!-- 상단 고정 바 -->
-    <div class="status">
-        <span>20:18　● Wi-Fi</span>
-        <span>▰ 82%</span>
-    </div>
+<div class="status"><span>20:18　● Wi-Fi</span><span>▰ 82%</span></div>
 
-    <!-- 잠금 화면 -->
-    <section id="lock" class="screen">
-        <div>
-            <div class="clock" id="clock">20:18</div>
-            <div class="date" id="date">10월 18일</div>
-            <div class="notification">
-                <b style="color: #ff3b30;">메시지 · 알림</b><br>
-                이청현<br>
-                읽지 않은 메시지가 있습니다.
-            </div>
-        </div>
-        <div>
-            <p style="margin-top:35px; font-size:13px; font-weight: bold;">이 휴대폰은 이청현의 소유입니다.</p>
-            <button class="unlock" onclick="unlock()">잠금 화면 열기　›</button>
-        </div>
-    </section>
+<section id="lock">
+<div class="clock" id="clock">20:18</div>
+<div class="date" id="date">10월 18일</div>
+<div class="notification">
+<b>메시지 · 알림</b><br>
+이청현<br>
+읽지 않은 메시지가 있습니다.
+</div>
+<p style="margin-top:35px;font-size:13px">이 휴대폰은 이청현의 소유입니다.</p>
+<button class="unlock" onclick="unlock()">잠금 화면 열기　›</button>
+</section>
 
-    <!-- 홈 화면 -->
-    <section id="home" class="screen">
-        <div class="header">
-            <div class="muted">내 휴대폰</div>
-            <h2>이청현</h2>
-            <div class="muted">마지막 사용 기록</div>
-        </div>
-        <div class="apps">
-            <div class="app" onclick="openPage('messages')"><div class="ico green">✉</div>메시지</div>
-            <div class="app" onclick="openPage('calls')"><div class="ico green">☎</div>전화</div>
-            <div class="app" onclick="openPage('contacts')"><div class="ico blue">♙</div>연락처</div>
-            <div class="app" onclick="openPage('photos')"><div class="ico orange">▧</div>갤러리</div>
-            <div class="app" onclick="openPage('notes')"><div class="ico purple">▤</div>메모</div>
-            <div class="app" onclick="openPage('settings')"><div class="ico gray">⚙</div>설정</div>
-        </div>
-    </section>
-
-    <!-- 세부 화면 구역 -->
-    <section id="page" class="screen">
-        <button class="back" onclick="back()">‹ 홈으로</button>
-        <div class="page-title-bar"><h3 id="heading"></h3></div>
-        <div id="list"></div>
-        <div id="detail"></div>
-    </section>
+<section id="home">
+<div class="header">
+<div class="muted">내 휴대폰</div>
+<h2>이청현</h2>
+<div class="muted">마지막 사용 기록</div>
+</div>
+<div class="apps">
+<div class="app" onclick="openPage('messages')"><div class="ico green">✉</div>메시지</div>
+<div class="app" onclick="openPage('calls')"><div class="ico green">☎</div>전화</div>
+<div class="app" onclick="openPage('contacts')"><div class="ico blue">♙</div>연락처</div>
+<div class="app" onclick="openPage('photos')"><div class="ico orange">▧</div>갤러리</div>
+<div class="app" onclick="openPage('notes')"><div class="ico purple">▤</div>메모</div>
+<div class="app" onclick="openPage('settings')"><div class="ico gray">⚙</div>설정</div>
+</div>
+<section id="page">
+<button class="back" onclick="back()">‹ 홈으로</button>
+<h3 id="heading"></h3>
+<div id="list"></div>
+<div id="detail"></div>
+</section>
+</section>
 </div>
 
 <script>
-// 원본 데이터 구조 유실 없이 100% 원본 복구 보존 완료
 const data={
 messages:{
 title:"메시지",
@@ -173,7 +130,7 @@ settings:{
 title:"설정",
 items:[
 ["휴대폰 정보","기기 이름","이청현의 휴대폰"],
-["배터리","82%","정상"],
+["배터리", "82%", "정상"],
 ["화면 설정","기본 테마","밝은 화면"]
 ]}
 };
@@ -257,3 +214,107 @@ const conversations={
 ["them","도착하면 연락해."],
 ["me","네."]
 ],
+"애딸린아재":[
+["them","오늘 보기로 한 거 맞지?"],
+["me","네. 맞아요."],
+["them","그런데 왜 아직 안 와?"],
+["me","조금 늦을 것 같아요."],
+["them","얼마나?"],
+["me","십 분에서 이십 분 정도요."],
+["them","전화했는데 계속 부재중이더라."],
+["me","배터리가 거의 없었어요."],
+["them","도착하면 바로 전화해."],
+["me","네. 도착하면 연락드릴게요."],
+["them","이번엔 꼭 와."],
+["me","알겠어요."]
+]
+};
+
+function unlock(){
+document.getElementById("lock").style.display="none";
+document.getElementById("home").style.display="block";
+}
+
+function openPage(name){
+document.querySelector(".apps").style.display="none";
+document.querySelector("#home .header").style.display="none";
+document.getElementById("page").style.display="block";
+document.getElementById("heading").textContent=data[name].title;
+document.getElementById("detail").innerHTML="";
+const list=document.getElementById("list");
+list.style.display="block";
+list.innerHTML="";
+data[name].items.forEach((item,index)=>{
+const el=document.createElement("div");
+el.className="item";
+el.innerHTML="<b>"+item[0]+"</b><small>"+item[1]+"</small>";
+el.onclick=()=>showDetail(name,index);
+list.appendChild(el);
+});
+}
+
+function showDetail(name,index){
+const item=data[name].items[index];
+const list=document.getElementById("list");
+const detail=document.getElementById("detail");
+list.style.display="none";
+detail.innerHTML="";
+if(name==="messages"){
+const chat=conversations[item[0]]||[
+["them","어디야?"],
+["me","지금 가요"],
+["them","도착하면 연락해."]
+];
+chat.forEach(m=>{
+const bubble=document.createElement("div");
+bubble.className=m[0]==="me"?"bubble":"reply";
+bubble.textContent=m[1];
+detail.appendChild(bubble);
+});
+const input=document.createElement("input");
+input.placeholder="메시지를 입력해 보세요";
+detail.appendChild(input);
+const send=document.createElement("button");
+send.textContent="보내기";
+send.style.marginTop="8px";
+send.onclick=()=>{
+const value=input.value.trim();
+if(!value)return;
+const bubble=document.createElement("div");
+bubble.className="bubble";
+bubble.textContent=value;
+detail.insertBefore(bubble,input);
+input.value="";
+};
+detail.appendChild(send);
+}else if(name==="photos"){
+detail.innerHTML="<div class='photo'>▧<br><br>"+item[0]+"</div><p>"+item[2]+"</p><p class='muted'>예시 갤러리입니다.</p>";
+}else{
+detail.textContent=item[0]+"\n"+item[1]+"\n\n"+item[2];
+}
+}
+
+function back(){
+if(document.getElementById("list").style.display==="none"){
+document.getElementById("list").style.display="block";
+document.getElementById("detail").innerHTML="";
+return;
+}
+document.getElementById("page").style.display="none";
+document.querySelector(".apps").style.display="grid";
+document.querySelector("#home .header").style.display="block";
+}
+
+function updateClock(){
+const now=new Date();
+document.getElementById("clock").textContent=
+String(now.getHours()).padStart(2,"0")+":"+
+String(now.getMinutes()).padStart(2,"0");
+document.getElementById("date").textContent=
+(now.getMonth()+1)+"월 "+now.getDate()+"일";
+}
+updateClock();
+setInterval(updateClock,30000);
+</script>
+</body>
+</html>
