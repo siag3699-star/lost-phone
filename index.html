@@ -8,41 +8,40 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
         body { background: #17191d; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
         
-        /* 리얼 스마트폰 본체 디바이스 프레임 */
+        /* 스마트폰 프레임 */
         .phone { width: 360px; height: 740px; border-radius: 36px; box-shadow: 0 25px 50px rgba(0,0,0,0.6); position: relative; overflow: hidden; display: flex; flex-direction: column; }
         
-        /* 스마트폰 상단바 인터페이스 */
-        .status { height: 32px; padding: 0 20px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; color: white; background: rgba(0,0,0,0.2); font-weight: 500; z-index: 100; }
+        /* 상단바 */
+        .status { height: 32px; padding: 0 20px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; color: white; background: rgba(0,0,0,0.3); font-weight: 500; z-index: 100; backdrop-filter: blur(10px); }
         .status-right { display: flex; align-items: center; gap: 6px; }
         .wifi-dot { width: 6px; height: 6px; background: white; border-radius: 50%; display: inline-block; }
         
-        /* 요청하신 마인크래프트 이미지 잠금 화면 배경화면 지정 */
+        /* 잠금 화면 (마인크래프트 배경화면 지정) */
         #lock { position: absolute; top: 32px; left: 0; width: 100%; height: calc(100% - 32px); padding: 40px 24px; display: flex; flex-direction: column; justify-content: space-between; color: white; text-align: center; z-index: 10; background: url('https://squarespace-cdn.com') no-repeat center center; background-size: cover; transition: transform 0.4s cubic-bezier(0.1, 1, 0.1, 1), opacity 0.3s; }
-        .clock { font-size: 64px; font-weight: 100; margin-top: 50px; letter-spacing: -1px; text-shadow: 1px 2px 4px rgba(0,0,0,0.4); }
-        .date { font-size: 14px; margin-top: 2px; opacity: 0.9; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+        .clock { font-size: 64px; font-weight: 100; margin-top: 50px; letter-spacing: -1px; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
+        .date { font-size: 14px; margin-top: 2px; opacity: 0.9; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
         
-        /* 알림 창 디자인 (블러 필터 가독성 업그레이드) */
+        /* 알림창 */
         .notification { margin-top: 60px; background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 20px; padding: 18px; text-align: left; line-height: 1.5; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.2); color: #111; }
         .notification b { font-size: 14px; color: #000; display: block; margin-bottom: 2px; }
-        .notification small { font-size: 12px; color: #333; font-weight: 500; }
+        .notification small { font-size: 12px; color: #222; font-weight: 500; }
         
-        /* 잠금해제 버튼 고도화 */
-        .unlock { margin: 40px auto 0; padding: 14px 32px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.6); background: rgba(0, 0, 0, 0.4); color: white; font-size: 14px; font-weight: bold; cursor: pointer; backdrop-filter: blur(5px); width: fit-content; transition: background 0.2s, transform 0.1s; display: block; outline: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .unlock:active { background: rgba(0, 0, 0, 0.6); transform: scale(0.96); }
+        /* 잠금해제 버튼터치 보강 */
+        .unlock { margin: 40px auto 0; padding: 14px 32px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.6); background: rgba(0, 0, 0, 0.5); color: white; font-size: 14px; font-weight: bold; cursor: pointer; backdrop-filter: blur(5px); width: fit-content; transition: background 0.2s, transform 0.1s; display: block; outline: none; -webkit-user-select: none; user-select: none; }
+        .unlock:active { background: rgba(0, 0, 0, 0.7); transform: scale(0.95); }
         
-        /* 요청하신 마인크래프트 이미지 홈 화면 배경화면 동일 지정 */
+        /* 홈 화면 (마인크래프트 배경화면 동일 지정) */
         #home { display: flex; flex-direction: column; height: calc(100% - 32px); position: relative; background: url('https://squarespace-cdn.com') no-repeat center center; background-size: cover; width: 100%; }
         .header { padding: 35px 24px 10px; text-align: left; color: white; }
-        .header h2 { font-size: 28px; margin: 2px 0 6px; font-weight: 700; letter-spacing: -0.5px; text-shadow: 1px 2px 4px rgba(0,0,0,0.5); }
-        .muted { font-size: 12px; opacity: 0.9; font-weight: bold; text-shadow: 1px 1px 3px rgba(0,0,0,0.6); color: #fff; }
+        .header h2 { font-size: 28px; margin: 2px 0 6px; font-weight: 700; letter-spacing: -0.5px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+        .muted { font-size: 12px; opacity: 0.9; font-weight: bold; text-shadow: 0 2px 5px rgba(0,0,0,0.6); color: #fff; }
         
-        /* 3열 홈 화면 앱 배치 */
+        /* 앱 아이콘 그리드 */
         .apps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 15px; padding: 25px 24px; flex-grow: 1; align-content: flex-start; }
-        .app { display: flex; flex-direction: column; align-items: center; text-align: center; font-size: 12px; color: white; font-weight: bold; cursor: pointer; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
+        .app { display: flex; flex-direction: column; align-items: center; text-align: center; font-size: 12px; color: white; font-weight: bold; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
         .ico { width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; margin-bottom: 8px; font-size: 26px; color: white; box-shadow: 0 6px 12px rgba(0,0,0,0.35); position: relative; transition: transform 0.1s; }
         .app:active .ico { transform: scale(0.92); }
         
-        /* 앱 아이콘 그라데이션 컬러셋 */
         .green { background: linear-gradient(135deg, #5ce19f, #229a57); }
         .blue { background: linear-gradient(135deg, #66a6ff, #2962ff); }
         .orange { background: linear-gradient(135deg, #ffb347, #ffcc00); }
@@ -64,13 +63,12 @@
         .item b { font-size: 15px; color: #111; display: block; margin-bottom: 2px; }
         .item small { display: block; color: #8a8e96; font-size: 12px; }
         
-        /* 스마트폰 메신저 인터페이스 (카카오톡/라인 테마) */
+        /* 카카오톡 스타일 메신저 방 */
         #detail { padding: 15px; background: #b2c7da; min-height: calc(100% - 60px); display: flex; flex-direction: column; box-sizing: border-box; }
         .bubble { background: #ffec42; color: #000; padding: 10px 14px; border-radius: 14px 0px 14px 14px; margin: 6px 0 6px auto; width: fit-content; max-width: 82%; font-size: 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.15); text-align: left; font-weight: 400; word-break: break-all; }
         .reply { background: white; color: #000; padding: 10px 14px; border-radius: 0px 14px 14px 14px; margin: 6px auto 6px 0; width: fit-content; max-width: 82%; font-size: 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.15); text-align: left; font-weight: 400; word-break: break-all; }
         .photo { background: #ffffff; border-radius: 16px; padding: 50px 10px; text-align: center; margin: 12px 0; font-size: 14px; color: #4e5561; font-weight: bold; border: 1px solid #e2e3e6; }
         
-        /* 하단 메시지 입력창 */
         .input-area { display: flex; gap: 8px; margin-top: auto; padding: 10px 0 15px; background: #b2c7da; position: sticky; bottom: 0; }
         input { padding: 12px 16px; border: 1px solid #bec8d2; border-radius: 24px; flex-grow: 1; font-size: 14px; outline: none; background: white; color: #000; }
         .send-btn { background: #ffec42; border: none; padding: 0 18px; border-radius: 24px; font-size: 13px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); color: #000; }
@@ -79,7 +77,6 @@
 <body>
 
 <div class="phone">
-    <!-- 상단 디바이스 상태 바 -->
     <div class="status">
         <span id="top-clock">20:18</span>
         <div class="status-right">
@@ -88,7 +85,7 @@
         </div>
     </div>
 
-    <!-- 잠금화면 (마인크래프트 배경화면 적용됨) -->
+    <!-- 잠금화면 -->
     <section id="lock">
         <div>
             <div class="clock" id="clock">20:18</div>
@@ -100,12 +97,12 @@
             </div>
         </div>
         <div>
-            <p style="font-size: 12px; opacity: 0.9; margin-bottom: 5px; font-weight:bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.6);">이 휴대폰은 이청현의 소유입니다.</p>
+            <p style="font-size: 12px; opacity: 0.9; margin-bottom: 12px; font-weight:bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.6);">이 휴대폰은 이청현의 소유입니다.</p>
             <button class="unlock" id="unlock-btn">잠금 화면 열기 〉</button>
         </div>
     </section>
 
-    <!-- 홈화면 (마인크래프트 배경화면 적용됨) -->
+    <!-- 홈화면 -->
     <section id="home">
         <div class="header">
             <div class="muted">내 휴대폰</div>
@@ -122,7 +119,6 @@
             <div class="app" onclick="openPage('settings')"><div class="ico gray">⚙</div>설정</div>
         </div>
         
-        <!-- 하위 레이어 서브 컴포넌트 -->
         <section id="page">
             <button class="back" onclick="back()">🎚 홈으로</button>
             <div class="page-title-bar"><h3 id="heading"></h3></div>
@@ -133,10 +129,17 @@
 </div>
 
 <script>
-// 데이터 구조 원본 전체 정밀 보존
+// 원본 데이터셋 완벽 보존
 const data = {
     messages: {
         title: "메시지",
         items: [
             ["라인뚱남", "오늘 오후 9:42", "오늘 만나기로 했잖아. 어디 있는 거야?"],
             ["인혁", "오늘 오후 8:13", "아저씨. 지금 오세요."],
+            ["저장되지 않은 번호", "오늘 오후 7:51", "언제 와"],
+            ["라인 yy.s12", "오늘 오후 7:20", "지금 어디야?"],
+            ["뚱녀", "오늘 오후 6:44", "읽었으면 답 좀 해."],
+            ["아줌마", "오늘 오후 5:38", "전화 왜 안 받아?"],
+            ["애딸린아재", "오늘 오후 4:16", "오늘 보기로 한 거 맞지?"]
+        ]
+    },
